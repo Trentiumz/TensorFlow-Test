@@ -19,10 +19,11 @@ def plot_the_model(model, feature, label):
 
     # Create a red line representing the model. The red line starts
     # at coordinates (x0, y0) and ends at coordinates (x1, y1).
-    x0 = 0
+    x0 = 1
     x1 = int(max(list(training_df[feature])))
-    for i in range(x0, x1 + 1):
-        plt.plot(i, model(i))
+    inputs = list(range(x0, x1 + 1))
+    outputs = model.evaluate(x=inputs, y=tuple([0] * 15))
+    plt.plot(inputs, outputs, c='r')
 
     # Render the scatter plot and the red line.
     plt.show()
@@ -57,10 +58,7 @@ def build_model(my_learning_rate):
     # Describe the topography of the model.
     # The topography of a simple linear regression model
     # is a single node in a single layer.
-    model.add(tf.keras.layers.Dense(units=1,
-                                    input_shape=(1,)))
-    model.add(tf.keras.layers.Dense(units=3,
-                                    input_shape=(1,)))
+    model.add(tf.keras.layers.Dense(units=1))
 
     # Compile the model topography into code that TensorFlow can efficiently
     # execute. Configure training to minimize the model's mean squared error.
@@ -113,7 +111,7 @@ print(training_df.describe())
 
 # The following variables are the hyperparameters.
 learning_rate = 0.01
-epochs = 30
+epochs = 5
 batch_size = 30
 
 # Specify the feature and the label.
@@ -125,8 +123,6 @@ weight, bias, epochs, rmse = train_model(my_model, training_df,
                                          my_feature, my_label,
                                          epochs, batch_size)
 
-print(weight)
-print(bias)
 # print("\nThe learned weight for your model is %.4f" % weight)
 # print("The learned bias for your model is %.4f\n" % bias)
 
