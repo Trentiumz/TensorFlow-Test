@@ -1,10 +1,11 @@
 import numpy as np
+import math
 from matplotlib import pyplot as plt
 
-w_learning_rate = 0.0001
-epochs = 2000
+w_learning_rate = 0.001
+epochs = 8000
 my_batch_size = 50
-b_learning_rate = w_learning_rate * my_batch_size
+b_learning_rate = w_learning_rate
 
 my_feature = range(my_batch_size)
 my_label = np.array([-3 * x for x in range(my_batch_size)]) + (np.random.random(my_batch_size) * 100 - 50) + 50
@@ -27,12 +28,14 @@ def train_model(model):
             y = my_label[index]
 
             total_loss += (y - model[1] - model[0] * x)**2
+            print(total_loss)
 
             total_w_grad += 2 * (y - model[1] - model[0] * x) * x
             total_b_grad += 2 * (y - model[1] - model[0] * x)
+
         model[0] += total_w_grad / my_batch_size * w_learning_rate
         model[1] += total_b_grad / my_batch_size * b_learning_rate
-        # print(f"{total_loss} {total_w_grad} {total_b_grad} {total_w_grad / my_batch_size} {total_b_grad / my_batch_size}")
+        # print(f"{total_loss} {total_w_grad} {total_b_grad} {total_w_grad / my_batch_size ** 2} {total_b_grad / my_batch_size ** 2}")
         errors.append(total_loss)
         # plot_model(model)
     return range(epochs), errors
