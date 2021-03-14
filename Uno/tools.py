@@ -24,6 +24,11 @@ def plot_greyscale_image(the_figure):
     plt.grid(False)
     plt.show()
 
+def plot_color_image(the_image):
+    plt.figure()
+    plt.imshow(the_image, cmap=plt.cm.binary)
+    plt.show()
+
 
 # LINEAR REGRESSOR ----------------------------------------------------------
 
