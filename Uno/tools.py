@@ -1,5 +1,5 @@
-import pandas as pd
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 
 # UNIVERSAL -------------------------------------------------------------
@@ -17,6 +17,12 @@ def get_features(dict_of_features, categoricals, numerics):
 def get_outputs(features_dict, model):
     return [x["probabilities"] for x in
             model.predict(get_regression_input_fn(features_dict, [0] * len(list(features_dict.items())[0][1])))]
+
+def plot_greyscale_image(the_figure):
+    plt.figure()
+    plt.imshow(the_figure)
+    plt.grid(False)
+    plt.show()
 
 
 # LINEAR REGRESSOR ----------------------------------------------------------
@@ -61,3 +67,6 @@ def get_classifier_input_fn(data_df, label_df, shuffle=True, batch_size=256):
 
 def get_incomplete_classifier_input_fn(features, batch_size=256):
     return lambda: tf.data.Dataset.from_tensor_slices(dict(features)).batch(batch_size)
+
+# GENERIC NEURAL NETWORK ---------------------------------------------------
+# lol there's actually nothing here; it's actually strangely so simple

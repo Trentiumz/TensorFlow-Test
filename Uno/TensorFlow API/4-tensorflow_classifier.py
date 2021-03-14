@@ -19,7 +19,7 @@ train_func = get_classifier_input_fn(train, train_ans)
 test_func = get_classifier_input_fn(test, test_ans, shuffle=False)
 
 print("start training")
-classifier.train(train_func, steps=25000)
+classifier.train(train_func, steps=10000)
 print("finished training")
 
 print("start evaluation")
