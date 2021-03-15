@@ -24,11 +24,15 @@ datagen = ImageDataGenerator(rotation_range=40, width_shift_range=0.2, height_sh
                              shear_range=0.2, zoom_range=0.2,horizontal_flip=True,fill_mode="nearest")
 
 batch_size = 500
-count = 600
+count = 400
+# The generator is a function which will create new batches of batch_size with slightly altered images of raw_train_images
 generator = datagen.flow(raw_train_images, raw_train_labels, batch_size=batch_size, shuffle=True)
+# Store the images
 train_images = np.zeros((count * batch_size, 32, 32, 3))
 train_labels = np.zeros((count * batch_size, 1))
 i = 0
+# we essentially enumerate the generator like a for loop, but it's actually recalculating every time
+# images is a 4d numpy array of batch_size images
 for images, labels in generator:
     train_images[batch_size * i : batch_size * (i + 1)] = images
     train_labels[batch_size * i : batch_size * (i + 1)] = labels
