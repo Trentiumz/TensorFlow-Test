@@ -59,4 +59,5 @@ checkpoint_dir = "Files/eight/checkpoints"
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt_{epoch}")
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=True)
 # Train the model, with a callback storing the current state after each epoch
-history = model.fit(text, epochs=100, callbacks=[checkpoint_callback])
+print(text)
+history = model.fit(text, epochs=100)
